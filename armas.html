@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Módulo de Armas</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0f172a;
+    color: white;
+    margin: 0;
+}
+
+.container {
+    width: 420px;
+}
+
+h2 {
+    text-align: center;
+}
+
+.perito {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ef4444;
+    margin-bottom: 20px;
+}
+
+.campo {
+    margin-bottom: 15px;
+}
+
+.campo-check label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.campo-check input {
+    width: 18px;
+    height: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+select, input, textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    background-color: white;
+    color: black;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.botoes {
+    margin-top: 20px;
+}
+
+button {
+    width: 45%;
+    padding: 12px;
+    margin: 5px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.avancar {
+    background-color: #22c55e;
+    color: white;
+}
+
+.finalizar {
+    background-color: #3b82f6; /* azul */
+    color: white;
+}
+
+.tela-centralizada {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.tela-scroll {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.voltar { background-color: #475569; color: white; }
+.salvar { background-color: #22c55e; color: white; }
+</style>
+</head>
+
+<body>
+
+
+<!-- ================= TELA PREAMBULO ================= -->
+
+<div id="telaPreambulo" class="tela tela-centralizada">
+
+<div style="
+    width:420px;
+    margin:auto;
+    text-align:center;
+">
+
+<h2 style="margin-bottom:10px;">Dados do Laudo</h2>
+
+<div style="
+    margin-bottom:15px;
+    font-size:20px;
+    font-weight:bold;
+    color:#ef4444;
+" id="peritoNome"></div>
+
+<select id="perito" style="
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:6px;
+    border:none;
+">
+
+<option value="">Selecione o Perito Criminal</option>
+
+<option>Dr. Bruno M. Gonçalves</option>
+<option>Dra. Cecília Rodrigues Silva</option>
+<option>Dr. Edgar M. Da Costa</option>
+<option>Dr. Fabio B. Do Serro</option>
+<option>Dra. Juliana F. Tonelli</option>
+<option>Dr. Marco A. Takeu Nishida</option>
+<option>Dr. Samarone S. Pereira</option>
+<option>Dr. Thalles Ramos Almeida</option>
+<option>Dr. Wander Pereira</option>
+
+</select>
+
+<input type="text" id="rep" placeholder="REP" style="
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:6px;
+    border:none;
+">
+
+<input type="text" id="bo" placeholder="BO" style="
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:6px;
+    border:none;
+">
+
+<input type="text" id="saep" placeholder="SAEP" style="
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:6px;
+    border:none;
+">
+
+<input type="date" id="data" style="
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:6px;
+    border:none;
+">
+
+<select id="cidade" style="
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:6px;
+    border:none;
+">
+<option value="">Selecione a cidade</option>
+<option>Aramina - SP</option>
+<option>Buritizal - SP</option>
+<option>Guará - SP</option>
+<option>Igarapava - SP</option>
+<option>Ipuã - SP</option>
+<option>Ituverava - SP</option>
+<option>Jeriquara - SP</option>
+<option>Miguelópolis - SP</option>
+<option>Morro Agudo - SP</option>
+<option>Nuporanga - SP</option>
+<option>Orlândia - SP</option>
+<option>Sales Oliveira - SP</option>
+<option>São Joaquim da Barra - SP</option>
+</select>
+
+<select id="delegado" style="
+    width:100%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:6px;
+    border:none;
+">
+<option value="">Selecione o delegado</option>
+<option>Alan Bazalha Lopes</option>
+<option>Ana Cláudia Fernandes Carvalho</option>
+<option>Andre Luis Jardim Barbosa</option>
+<option>André Jose Lopes</option>
+<option>Clodovaldo Vieira Delgado</option>
+<option>Dalmo Mateus Polo</option>
+<option>Daniel Paulo Radaeli</option>
+<option>David Abmael David</option>
+<option>Djalma Donizete Batista</option>
+<option>Eduardo Lopes Bonfim</option>
+<option>Fábio José Branquinho Pereira</option>
+<option>Gabriel Fernando Tomaz da Silva</option>
+<option>Gustavo de Almeida Costa</option>
+<option>Helder Rodrigues</option>
+<option>Hugo Anselmo Ravagnani</option>
+<option>Jacqueline Bessa Francolin</option>
+<option>João Baptistussi Neto</option>
+<option>João Paulo de Oliveira Marques</option>
+<option>José Arnaldo Andreotti Junior</option>
+<option>José Bernardino Alecrim</option>
+<option>Jucélio de Paula Silva Rego</option>
+<option>Juliana da Silva Paiva</option>
+<option>Leopoldo Gomes de Novais</option>
+<option>Luciano Henrique Cintra</option>
+<option>Márcio Barbosa Macedo</option>
+<option>Márcio Garcia Murari</option>
+<option>Milessandro Mazola Moreti</option>
+<option>Otavio Volpini Silva</option>
+<option>Paulo de Castro Cervantes</option>
+<option>Paulo Sérgio Francolin Junior</option>
+<option>Rafael de Paula Leão Andreo</option>
+<option>Soraia Pinhone Ravagnani</option>
+<option>Telismar Aparecido da Silva Junior</option>
+<option>Vinicius Alexandre Marini</option>
+<option>Vitor Farnesi e Silva</option>
+<option>Wanir José Silveira Junior</option>
+<option>Preencher no laudo</option>
+</select>
+
+<div style="margin-top:20px;">
+
+<button onclick="voltar()" style="
+    width:45%;
+    padding:12px;
+    margin:5px;
+    border-radius:6px;
+    border:none;
+    background:#475569;
+    color:white;
+">
+Voltar
+</button>
+
+<button onclick="salvarPreambulo()" style="
+    width:45%;
+    padding:12px;
+    margin:5px;
+    border-radius:6px;
+    border:none;
+    background:#22c55e;
+    color:white;
+">
+Avançar
+</button>
+
+</div>
+
+</div>
+</div>
+
+<!-- ================= TELA SELEÇÃO ================= -->
+<div id="telaSelecao" class="hidden tela tela-centralizada">
+
+<div class="container" style="text-align:center;">
+
+<h2>Selecione o item</h2>
+
+<div class="campo campo-check" style="text-align:left; margin-top:20px;">
+
+<label><input type="radio" name="item" id="sel_arma"> Arma</label>
+<label><input type="radio" name="item" id="sel_municao"> Munição</label>
+<label><input type="radio" name="item" id="sel_coldre"> Coldre</label>
+<label><input type="radio" name="item" id="sel_simulacro"> Simulacro</label>
+
+</div>
+
+<div style="display:flex; gap:10px; margin-top:20px;">
+
+<button class="voltar" style="flex:1;" onclick="mostrarTela('telaPreambulo')">Voltar</button>
+
+<button id="btnFinalizar" class="finalizar" style="flex:1;" onclick="finalizar()">Finalizar</button>
+
+<button class="salvar" style="flex:1;" onclick="avancar()">Avançar</button>
+
+</div>
+
+</div>
+</div>
+
+<!-- ================= TELA ARMA (INALTERADA) ================= -->
+<div id="telaArma" class="hidden tela tela-scroll">
+
+<div class="container" style="text-align:center; margin-top:30px;">
+
+<h2 style="margin-bottom:20px;">Descrição da Arma</h2>
+
+<div class="campo">
+<label>Tipo de disparo</label>
+<select id="disparo">
+<option value="">Selecione</option>
+<option>repetição</option>
+<option>semi-automática</option>
+<option>automática</option>
+</select>
+</div>
+
+<div class="campo">
+<label>Tipo de arma</label>
+<select id="tipo_arma">
+<option value="">Selecione</option>
+<option>revólver</option>
+<option>pistola</option>
+<option>espingarda</option>
+<option>fuzil</option>
+<option>metralhadora</option>
+</select>
+</div>
+
+<div class="campo">
+<label>Tipo de fabricação</label>
+<select id="fabricacao">
+<option value="">Selecione</option>
+<option>artesanalmente</option>
+<option>industrialmente</option>
+</select>
+</div>
+
+<div class="campo">
+<label>Oxidação</label>
+<select id="oxidacao">
+<option value="">Selecione</option>
+<option>oxidada</option>
+<option>inoxidada</option>
+</select>
+</div>
+
+<div class="campo">
+<label>Cabo</label>
+<select id="cabo">
+<option value="">Selecione</option>
+<option>polímero</option>
+<option>madeira</option>
+<option>borracha / elastômero</option>
+<option>metal</option>
+<option>madrepérola</option>
+</select>
+</div>
+
+<div class="campo">
+<label>Marca</label>
+<select id="marca" onchange="toggleOutro(this, 'marca_outro')">
+<option value="">Selecione</option>
+<option>Beretta</option>
+<option>Boito</option>
+<option>CBC / Magtech</option>
+<option>CZ (Česká Zbrojovka)</option>
+<option>Glock</option>
+<option>Imbel</option>
+<option>Rossi</option>
+<option>SIG Sauer</option>
+<option>Smith & Wesson</option>
+<option>Taurus</option>
+<option value="outro">Outro</option>
+</select>
+<input type="text" id="marca_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<div class="campo">
+<label>Modelo</label>
+<input type="text" id="modelo">
+</div>
+
+<div class="campo">
+<label>Calibre</label>
+<select id="calibre" onchange="toggleOutro(this, 'calibre_outro')">
+<option value="">Selecione</option>
+<option>.22 LR</option>
+<option>.25 ACP (6,35 mm)</option>
+<option>.32 S&amp;W</option>
+<option>.32 Auto / 32ACP / 7,65x17 Browning / 7,65 Browning Short</option>
+<option>.357 Magnum</option>
+<option>.38 SPL</option>
+<option>.38 Super Auto +P*</option>
+<option>.380 Auto / 380ACP / 9x17mm / 9mm Browning</option>
+<option>9mm Luger / 9mm PARA / 9mm Parabellum / 9x19</option>
+<option>.40 S&amp;W</option>
+<option>.44 Rem Mag</option>
+<option>.45 Auto</option>
+<option>7.62x39 mm</option>
+<option>7.62x51mm NATO</option>
+<option>12 / 12GA / 12Gauge</option>
+<option>16 / 16GA / 16Gauge</option>
+<option>20 / 20GA / 20Gauge</option>
+<option>24 / 24GA / 24Gauge</option>
+<option>28 / 28GA / 28Gauge</option>
+<option>32 / 32GA / 32Gauge</option>
+<option>.50 BMG / .50 Browning</option>
+<option value="outro">DESCREVER</option>
+</select>
+<input type="text" id="calibre_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<div class="campo">
+<label>Comprimento do cano</label>
+<select id="cano" onchange="toggleOutro(this, 'cano_outro')">
+<option value="">Selecione</option>
+<option>2" polegadas / 50,8 milímetros</option>
+<option>3" polegadas / 76,2 milímetros</option>
+<option>3.5" polegadas / 88,9 milímetros</option>
+<option>4" polegadas / 101,6 milímetros</option>
+<option>5" polegadas / 127 milímetros</option>
+<option>6" polegadas / 152,4 milímetros</option>
+<option value="outro">Outro</option>
+</select>
+<input type="text" id="cano_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<div class="campo">
+<label>Número de série</label>
+<input type="text" id="serie">
+</div>
+
+<div class="campo">
+<label>Capacidade</label>
+<select id="capacidade" onchange="toggleOutro(this, 'capacidade_outro')">
+<option value="">Selecione</option>
+<option>1 munição</option>
+<option>2 munições</option>
+<option>3 munições</option>
+<option>4 munições</option>
+<option>5 munições</option>
+<option>6 munições</option>
+<option>7 munições</option>
+<option>8 munições</option>
+<option>9 munições</option>
+<option>10 munições</option>
+<option>12 munições</option>
+<option>15 munições</option>
+<option>15 munições (14+1)</option>
+<option>17 munições</option>
+<option>17 munições (16+1)</option>
+<option>19 munições</option>
+<option>19 munições (18+1)</option>
+<option>20 munições</option>
+<option>20 munições (19+1)</option>
+<option>30 munições</option>
+<option>40 munições</option>
+<option>Não identificado</option>
+<option value="outro">DESCREVER</option>
+</select>
+<input type="text" id="capacidade_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<div class="campo">
+<label>Alma</label>
+<select id="alma">
+<option value="">Selecione</option>
+<option>raiada</option>
+<option>lisa</option>
+</select>
+</div>
+
+<div class="campo">
+<label>Tipo de cão</label>
+<select id="cao" onchange="toggleOutro(this, 'cao_outro')">
+<option value="">Selecione</option>
+<option>Cão aparente, percutor externo</option>
+<option>Cão aparente, percutor interno</option>
+<option>Cão não aparente, percutor interno</option>
+<option>Sem cão, percutor interno</option>
+<option>Cão semi-aparente, percutor interno</option>
+<option>Cão rebatido, percutor interno</option>
+<option>Não identificado</option>
+<option>Não se aplica</option>
+<option value="outro">Outro</option>
+</select>
+<input type="text" id="cao_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<div class="campo">
+<label>Observações</label>
+<textarea id="obs"></textarea>
+</div>
+
+<div class="campo">
+<label>Eficácia</label>
+<select id="eficacia" onchange="toggleOutro(this, 'eficacia_outro')">
+<option value="">Selecione</option>
+<option>EFICAZ</option>
+<option>INEFICAZ</option>
+<option value="outro">Outro</option>
+</select>
+<input type="text" id="eficacia_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<div class="campo">
+<label>Recenticidade</label>
+<select id="recent">
+<option value="">Selecione</option>
+<option>POSITIVO</option>
+<option>NEGATIVO</option>
+<option>PREJUDICADO</option>
+<option>EM BRANCO</option>
+</select>
+</div>
+
+<div class="campo">
+<label>Lacre de saída arma</label>
+<input type="text" id="lsarma">
+</div>
+
+<button class="avancar" onclick="salvarArma()">Salvar e voltar</button>
+<button class="voltar" onclick="mostrarTela('telaSelecao')">Voltar</button>
+
+</div> <!-- container -->
+</div> <!-- telaArma -->
+
+<!-- ================= TELA COLDRE ================= -->
+<div id="telaColdre" class="hidden tela tela-scroll">
+
+<div class="container" style="text-align:center; margin-top:30px;">
+
+<h2 style="margin-bottom:20px;">Descrição do Coldre</h2>
+
+<!-- MARCA COLDRE -->
+<div class="campo">
+<label>Marca coldre</label>
+<select id="coldre_marca" onchange="toggleOutro(this, 'coldre_marca_outro')">
+<option value="">Selecione</option>
+<option>Bélica</option>
+<option>Blackhawk</option>
+<option>BR Force</option>
+<option>Cytac</option>
+<option>Cia do Coldre</option>
+<option>Coldres Castro</option>
+<option>Guartelá</option>
+<option>Fobus</option>
+<option>Invictus</option>
+<option>IMI Defense</option>
+<option>Safariland</option>
+<option>Só Coldres</option>
+<option>Sem marca aparente</option>
+<option value="outro">DESCREVER</option>
+</select>
+<input type="text" id="coldre_marca_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<!-- MATERIAL -->
+<div class="campo">
+<label>Material coldre</label>
+<select id="coldre_material" onchange="toggleOutro(this, 'coldre_material_outro')">
+<option value="">Selecione</option>
+<option>Polímero</option>
+<option>Kydex</option>
+<option>Couro</option>
+<option>Nylon</option>
+<option>Tecido sintético</option>
+<option>Neoprene</option>
+<option>Material híbrido (kydex + couro/tecido)</option>
+<option>Não identificado</option>
+<option value="outro">Outro (descrever)</option>
+</select>
+<input type="text" id="coldre_material_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<!-- USO -->
+<div class="campo">
+<label>Uso</label>
+<select id="coldre_uso" onchange="toggleOutro(this, 'coldre_uso_outro')">
+<option value="">Selecione</option>
+<option>externo de cintura (owb)</option>
+<option>interno de cintura (iwb)</option>
+<option>velado (porte oculto)</option>
+<option>ostensivo</option>
+<option>de perna (thigh holster)</option>
+<option>de ombro</option>
+<option>de tornozelo (ankle)</option>
+<option>dorsal (costas)</option>
+<option>de colete tático</option>
+<option>não identificado</option>
+<option value="outro">outro (descrever)</option>
+</select>
+<input type="text" id="coldre_uso_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<!-- SISTEMA DE SEGURANÇA -->
+<div class="campo">
+<label>Sistema de segurança</label>
+<select id="coldre_seguranca" onchange="toggleOutro(this, 'coldre_seguranca_outro')">
+<option value="">Selecione</option>
+<option>sem retenção ativa</option>
+<option>retenção por fricção</option>
+<option>retenção com botão de liberação (botoadura)</option>
+<option>retenção com trava por dedo indicador</option>
+<option>retenção com alça de segurança</option>
+<option>retenção com capuz giratório (hood)</option>
+<option>retenção nível I</option>
+<option>retenção nível II</option>
+<option>retenção nível III</option>
+<option>não identificado</option>
+<option value="outro">outro (descrever)</option>
+<option>Opção 12</option>
+</select>
+<input type="text" id="coldre_seguranca_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<div class="campo">
+<label>Lacre de saída coldre</label>
+<input type="text" id="lscoldre">
+</div>
+
+<!-- BOTÕES -->
+<div style="display:flex; gap:10px; margin-top:20px;">
+
+<button class="voltar" style="flex:1;" onclick="mostrarTela('telaSelecao')">Voltar</button>
+
+<button class="salvar" style="flex:1;" onclick="salvarColdre()">Salvar</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- ================= TELA SIMULACRO ================= -->
+<div id="telaSimulacro" class="hidden tela tela-scroll">
+
+<div class="container" style="text-align:center; margin-top:30px;">
+
+<h2 style="margin-bottom:20px;">Descrição do Simulacro</h2>
+
+<div class="campo">
+<label>Material simula</label>
+<select id="simula_material" onchange="toggleOutro(this, 'simula_material_outro')">
+<option value="">Selecione</option>
+<option>polímero (plástico de alta resistência)</option>
+<option>metal</option>
+<option>metal e polímero</option>
+<option>alumínio</option>
+<option>liga metálica (zamac)</option>
+<option>aço</option>
+<option>madeira</option>
+<option>madeira e metal</option>
+<option>não identificado</option>
+<option value="outro">DESCREVER</option>
+</select>
+<input type="text" id="simula_material_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<div class="campo">
+<label>Cor simula</label>
+<select id="simula_cor" onchange="toggleOutro(this, 'simula_cor_outro')">
+<option value="">Selecione</option>
+<option>preta</option>
+<option>prata</option>
+<option value="outro">Outro</option>
+</select>
+<input type="text" id="simula_cor_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<div class="campo">
+<label>Marca simula</label>
+<input type="text" id="simula_marca">
+</div>
+
+<div class="campo">
+<label>Tipo de simulacro</label>
+<select id="simula_tipo" onchange="toggleOutro(this, 'simula_tipo_outro')">
+<option value="">Selecione</option>
+<option>ação por mola (spring)</option>
+<option>ação por gás ram (pistão a gás)</option>
+<option>ação por co₂</option>
+<option>ação por pcp (pré-carregada pneumática)</option>
+<option>ação elétrica (aeg)</option>
+<option>ação híbrida (mola e gás)</option>
+<option>espoleta</option>
+<option>que não dispara projétil</option>
+<option>não identificado</option>
+<option value="outro">Outro</option>
+</select>
+<input type="text" id="simula_tipo_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<div class="campo">
+<label>Modelo simula</label>
+<input type="text" id="simula_modelo">
+</div>
+
+<div class="campo">
+<label>Fabricante simula</label>
+<input type="text" id="simula_fabricante">
+</div>
+
+<div class="campo">
+<label>Número simula</label>
+<input type="text" id="simula_numero">
+</div>
+
+<div class="campo">
+<label>Calibre simula</label>
+<select id="simula_calibre" onchange="toggleOutro(this, 'simula_calibre_outro')">
+<option value="">Selecione</option>
+<option>6 mm</option>
+<option>8 mm</option>
+<option>4,5 mm (.177)</option>
+<option>5,5 mm (.22)</option>
+<option>6,35 mm (.25)</option>
+<option>9 mm</option>
+<option>não identificado</option>
+<option value="outro">DESCREVER</option>
+</select>
+<input type="text" id="simula_calibre_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<div class="campo">
+<label>Alimentação simula</label>
+<select id="simula_alimentacao" onchange="toggleOutro(this, 'simula_alimentacao_outro')">
+<option value="">Selecione</option>
+<option>monotiro</option>
+<option>repetição por ferrolho (bolt action)</option>
+<option>repetição por alavanca (lever action)</option>
+<option>repetição por bombeamento (pump action)</option>
+<option>carregador destacável</option>
+<option>carregador tubular</option>
+<option>tambor rotativo</option>
+<option>alimentação por fita (belt)</option>
+<option>não identificado</option>
+<option value="outro">DESCREVER</option>
+</select>
+<input type="text" id="simula_alimentacao_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<div class="campo">
+<label>Apta</label>
+<select id="simula_apta" onchange="toggleOutro(this, 'simula_apta_outro')">
+<option value="">Selecione</option>
+<option>Sim</option>
+<option>Não</option>
+<option value="outro">Outro</option>
+</select>
+<input type="text" id="simula_apta_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<div class="campo">
+<label>Ponta laranja</label>
+<select id="simula_ponta" onchange="toggleOutro(this, 'simula_ponta_outro')">
+<option value="">Selecione</option>
+<option>Sim</option>
+<option>Não</option>
+<option value="outro">Outro</option>
+</select>
+<input type="text" id="simula_ponta_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<div class="campo">
+<label>Lacre de saída simulacro</label>
+<input type="text" id="lssimulacro">
+</div>
+
+<div style="display:flex; gap:10px; margin-top:20px;">
+<button class="voltar" style="flex:1;" onclick="mostrarTela('telaSelecao')">Voltar</button>
+<button class="salvar" style="flex:1;" onclick="salvarSimulacro()">Salvar</button>
+</div>
+
+
+</div>
+</div>
+
+
+<!-- ================= TELA MUNIÇÃO ================= -->
+<div id="telaMunicao" class="hidden tela tela-scroll">
+
+<div class="container" style="text-align:center; margin-top:30px;">
+
+<h2 style="margin-bottom:20px;">
+Descrição da Munição <span id="numMunicao">1</span>
+</h2>
+
+<!-- QUANTIDADE TOTAL -->
+<div class="campo">
+<label>Quantidade total (todas as munições recebidas)</label>
+<input type="text" id="municao_total">
+</div>
+
+<!-- QTDE -->
+<div class="campo">
+<label>Quantidade (Munição desta tela)</label>
+<input type="text" id="m_qtde">
+</div>
+
+<!-- SITUAÇÃO -->
+<div class="campo">
+<label>Situação</label>
+<select id="m_situacao" onchange="toggleOutro(this, 'm_situacao_outro')">
+<option value="">Selecione</option>
+<option>Intacta(s)</option>
+<option>Deflagrada(s)</option>
+<option>Com marca de percussão</option>
+<option value="outro">Outro</option>
+</select>
+<input type="text" id="m_situacao_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<!-- INSCRIÇÃO -->
+<div class="campo">
+<label>Inscrição</label>
+<textarea id="m_inscricao"></textarea>
+</div>
+
+<!-- CALIBRE -->
+<div class="campo">
+<label>Calibre</label>
+<select id="m_calibre" onchange="toggleOutro(this, 'm_calibre_outro')">
+<option value="">Selecione</option>
+<option>.22 LR</option>
+<option>.25 ACP (6,35 mm)</option>
+<option>.32 S&amp;W</option>
+<option>.32 Auto / 32ACP / 7,65x17 Browning / 7,65 Browning Short</option>
+<option>.357 Magnum</option>
+<option>.38 SPL</option>
+<option>.38 Super Auto +P*</option>
+<option>.380 Auto / 380ACP / 9x17mm / 9mm Browning</option>
+<option>9mm Luger / 9mm PARA / 9mm Parabellum / 9x19</option>
+<option>.40 S&amp;W</option>
+<option>.44 Rem Mag</option>
+<option>.45 Auto</option>
+<option>7.62x39 mm</option>
+<option>7.62x51mm NATO</option>
+<option>12 / 12GA / 12Gauge</option>
+<option>16 / 16GA / 16Gauge</option>
+<option>20 / 20GA / 20Gauge</option>
+<option>24 / 24GA / 24Gauge</option>
+<option>28 / 28GA / 28Gauge</option>
+<option>32 / 32GA / 32Gauge</option>
+<option>.50 BMG / .50 Browning</option>
+<option value="outro">DESCREVER</option>
+</select>
+<input type="text" id="m_calibre_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<!-- ESTOJO -->
+<div class="campo">
+<label>Estojo</label>
+<select id="m_estojo" onchange="toggleOutro(this, 'm_estojo_outro')">
+<option value="">Selecione</option>
+<option>latão dourado</option>
+<option>latão prateado</option>
+<option>plástico</option>
+<option value="outro">DESCREVER</option>
+</select>
+<input type="text" id="m_estojo_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<!-- PROJÉTIL -->
+<div class="campo">
+<label>Projétil</label>
+<select id="m_proj" onchange="toggleOutro(this, 'm_proj_outro')">
+<option value="">Selecione</option>
+<option>Balote (projétil único)</option>
+<option>Cartucho SG (balins)</option>
+<option>CHOG (chumbo ogival)</option>
+<option>EXPO (expansivo ponta oca)</option>
+<option>ETOG (encamisado total ogival)</option>
+<option>EXPP (expansivo ponta plana)</option>
+<option>ETPP (encamisado total ponta de polímero)</option>
+<option>Cartucho de borracha (menos letal)</option>
+<option>Cartucho buckshot (múltiplos balins)</option>
+<option>Cartucho de elastômero (menos letal)</option>
+<option>CHCV (chumbo canto vivo)</option>
+<option>CHOG - TP (chumbo ogival)</option>
+<option>CHPP (chumbo ponta plana)</option>
+<option>CSCV (chumbo semi canto vivo)</option>
+<option>ESCV (encamisado semi canto vivo)</option>
+<option>ETPT (encamisado total pontiagudo)</option>
+<option>EXPT (expansivo pontiagudo)</option>
+<option value="outro">DESCREVER</option>
+</select>
+<input type="text" id="m_proj_outro" class="hidden" placeholder="Descrever">
+</div>
+
+<div class="campo">
+<label>Eficaz</label>
+
+<select id="m_eficaz" onchange="toggleOutro(this, 'm_eficaz_outro')">
+<option value="">Selecione</option>
+<option value="EFICAZ">EFICAZ</option>
+<option value="INEFICAZ">INEFICAZ</option>
+<option value="">Em branco</option>
+<option value="outro">Outro</option>
+</select>
+<input type="text"
+id="m_eficaz_outro"
+class="hidden"
+placeholder="Descreva">
+
+</div>
+
+
+<div class="campo" id="campo_lacre_municao">
+<label>Lacre de saída munição</label>
+<input type="text" id="lsmunicao">
+</div>
+
+<!-- BOTÕES -->
+<div style="display:flex; gap:10px; margin-top:20px;">
+
+<button class="voltar" style="flex:1;" onclick="mostrarTela('telaSelecao')">
+Voltar
+</button>
+
+<button class="salvar" style="flex:1;" onclick="salvarMunicao()">
+Salvar
+</button>
+
+<button class="avancar" style="flex:1;" onclick="adicionarMunicao()">
+Adicionar outra
+</button>
+
+</div>
+
+</div>
+</div>
+<script>
+
+/* ================= CONTROLE DE TELAS ================= */
+
+function mostrarTela(id) {
+    document.querySelectorAll(".tela").forEach(t => t.classList.add("hidden"));
+    document.getElementById(id).classList.remove("hidden");
+}
+
+/* ================= CONTROLE CAMPO TOTAL ================= */
+
+function controlarCampoTotal() {
+
+    const campoTotal = document.getElementById("municao_total").parentElement;
+
+    if (municaoIndex === 1) {
+        campoTotal.classList.remove("hidden");
+    } else {
+        campoTotal.classList.add("hidden");
+    }
+}
+
+/* ================= CONTROLE MUNIÇÃO ================= */
+
+let municaoIndex = 1;
+
+/* ================= CONTROLE LACRE MUNIÇÃO ================= */
+
+function controlarLacreMunicao() {
+
+    const campo = document.getElementById("campo_lacre_municao");
+
+    if (municaoIndex === 1) {
+        campo.classList.remove("hidden");
+    } else {
+        campo.classList.add("hidden");
+    }
+}
+
+/* ================= SALVAR PREAMBULO ================= */
+
+function salvarPreambulo() {
+
+    const perito = document.getElementById("perito").value;
+    const rep = document.getElementById("rep").value;
+    const bo = document.getElementById("bo").value;
+    const saep = document.getElementById("saep").value;
+    const cidade = document.getElementById("cidade").value;
+    const delegado = document.getElementById("delegado").value;
+
+    if (!perito || !rep || !cidade || !delegado) {
+        alert("Preencha os campos obrigatórios!");
+        return;
+    }
+
+    const data = document.getElementById("data").value;
+
+    const timestamp = new Date().toLocaleString("pt-BR");
+
+    localStorage.setItem("timestamp", timestamp);
+    localStorage.setItem("perito", perito);
+    localStorage.setItem("rep", rep);
+    localStorage.setItem("bo", bo);
+    localStorage.setItem("saep", saep);
+    localStorage.setItem("data", data);
+    localStorage.setItem("cidade", cidade);
+    localStorage.setItem("delegado", delegado);
+
+    mostrarTela("telaSelecao");
+}
+
+
+/* ================= NAVEGAÇÃO ================= */
+
+function avancar() {
+
+    if (document.getElementById("sel_arma").checked) {
+        mostrarTela("telaArma");
+        return;
+    }
+
+    if (document.getElementById("sel_municao").checked) {
+    municaoIndex = 1;
+    document.getElementById("numMunicao").innerText = municaoIndex;
+    mostrarTela("telaMunicao");
+    controlarCampoTotal();
+    controlarLacreMunicao();
+    return;
+    }
+
+    if (document.getElementById("sel_coldre").checked) {
+        mostrarTela("telaColdre");
+        return;
+    }
+
+    if (document.getElementById("sel_simulacro").checked) {
+        mostrarTela("telaSimulacro");
+        return;
+    }
+
+    alert("Selecione um item");
+}
+
+function voltar() {
+    window.location.href = "index.html";
+}
+
+
+/* ================= FLAGS ================= */
+
+function setFlag(tipo, marcado) {
+    if (marcado) localStorage.setItem(tipo, "SIM");
+    else localStorage.setItem(tipo, "NÃO");
+}
+
+
+/* ================= UTILITÁRIOS ================= */
+
+function toggleOutro(select, id) {
+    const campo = document.getElementById(id);
+    if (select.value === "outro") {
+        campo.classList.remove("hidden");
+    } else {
+        campo.classList.add("hidden");
+        campo.value = "";
+    }
+}
+
+function valor(id, outroId) {
+    const v = document.getElementById(id).value;
+
+    if (v === "outro") {
+        const outro = document.getElementById(outroId).value.trim();
+        return outro !== "" ? outro : "Não informado";
+    }
+
+    return v;
+}
+
+
+/* ================= SALVAR ARMA ================= */
+
+function salvarArma() {
+
+    // CAPTURA DOS VALORES
+    const disparo = document.getElementById("disparo").value;
+    const tipo = document.getElementById("tipo_arma").value;
+    const fabricacao = document.getElementById("fabricacao").value;
+    const oxidacao = document.getElementById("oxidacao").value;
+    const cabo = document.getElementById("cabo").value;
+
+    const marca = valor("marca", "marca_outro");
+    const modelo = document.getElementById("modelo").value;
+
+    const calibre = valor("calibre", "calibre_outro");
+    const cano = valor("cano", "cano_outro");
+
+    const serie = document.getElementById("serie").value;
+    const capacidade = valor("capacidade", "capacidade_outro");
+
+    const alma = document.getElementById("alma").value;
+    const cao = valor("cao", "cao_outro");
+
+    const obs = document.getElementById("obs").value;
+
+    const eficacia = valor("eficacia", "eficacia_outro");
+    const recente = document.getElementById("recent").value;
+    const lsarma = document.getElementById("lsarma").value;
+
+    // SALVAMENTO NO LOCALSTORAGE
+    localStorage.setItem("arma_disparo", disparo);
+    localStorage.setItem("arma_tipo", tipo);
+    localStorage.setItem("arma_fabricacao", fabricacao);
+    localStorage.setItem("arma_oxidacao", oxidacao);
+    localStorage.setItem("arma_cabo", cabo);
+
+    localStorage.setItem("arma_marca", marca);
+    localStorage.setItem("arma_modelo", modelo);
+    localStorage.setItem("arma_calibre", calibre);
+    localStorage.setItem("arma_cano", cano);
+
+    localStorage.setItem("arma_serie", serie);
+    localStorage.setItem("arma_capacidade", capacidade);
+
+    localStorage.setItem("arma_alma", alma);
+    localStorage.setItem("arma_cao", cao);
+
+    localStorage.setItem("arma_obs", obs);
+
+    localStorage.setItem("arma_eficacia", eficacia);
+    localStorage.setItem("arma_recente", recente);
+    localStorage.setItem("lacre_saida_arma", lsarma);
+
+    alert("Dados da arma salvos 👊");
+    mostrarTela("telaSelecao");
+}
+/* ================= SALVAR COLDRE ================= */
+
+function salvarColdre() {
+
+    // CAPTURA DOS VALORES
+    const marca = valor("coldre_marca", "coldre_marca_outro");
+    const material = valor("coldre_material", "coldre_material_outro");
+    const uso = valor("coldre_uso", "coldre_uso_outro");
+    const seguranca = valor("coldre_seguranca", "coldre_seguranca_outro");
+    const lscoldre = document.getElementById("lscoldre").value;
+
+    // SALVAMENTO NO LOCALSTORAGE
+    localStorage.setItem("coldre_marca", marca);
+    localStorage.setItem("coldre_material", material);
+    localStorage.setItem("coldre_uso", uso);
+    localStorage.setItem("coldre_seguranca", seguranca);
+    localStorage.setItem("lacre_saida_coldre", lscoldre);
+
+    alert("Dados do coldre salvos 👊");
+    mostrarTela("telaSelecao");
+}
+
+/* ================= SALVAR SIMULACRO ================= */
+
+function salvarSimulacro() {
+
+    // CAPTURA DOS VALORES
+    const material = valor("simula_material", "simula_material_outro");
+    const cor = valor("simula_cor", "simula_cor_outro");
+    const marca = document.getElementById("simula_marca").value;
+
+    const tipo = valor("simula_tipo", "simula_tipo_outro");
+    const modelo = document.getElementById("simula_modelo").value;
+    const fabricante = document.getElementById("simula_fabricante").value;
+    const numero = document.getElementById("simula_numero").value;
+
+    const calibre = valor("simula_calibre", "simula_calibre_outro");
+    const alimentacao = valor("simula_alimentacao", "simula_alimentacao_outro");
+
+    const apta = valor("simula_apta", "simula_apta_outro");
+    const ponta = valor("simula_ponta", "simula_ponta_outro");
+
+    const lssimulacro = document.getElementById("lssimulacro").value;
+
+    // SALVAMENTO NO LOCALSTORAGE
+    localStorage.setItem("simula_material", material);
+    localStorage.setItem("simula_cor", cor);
+    localStorage.setItem("simula_marca", marca);
+
+    localStorage.setItem("simula_tipo", tipo);
+    localStorage.setItem("simula_modelo", modelo);
+    localStorage.setItem("simula_fabricante", fabricante);
+    localStorage.setItem("simula_numero", numero);
+
+    localStorage.setItem("simula_calibre", calibre);
+    localStorage.setItem("simula_alimentacao", alimentacao);
+
+    localStorage.setItem("simula_apta", apta);
+    localStorage.setItem("simula_ponta", ponta);
+
+    localStorage.setItem("lacre_saida_simulacro", lssimulacro);
+
+    alert("Dados do simulacro salvos 👊");
+    mostrarTela("telaSelecao");
+}
+
+/* ================= SALVAR MUNIÇÃO ================= */
+
+function salvarMunicao() {
+
+    // QUANTIDADE TOTAL (fora do índice)
+    const total = document.getElementById("municao_total").value;
+    localStorage.setItem("municao_total", total);
+
+    // CAPTURA DOS VALORES DA MUNIÇÃO ATUAL
+    const qtde = document.getElementById("m_qtde").value;
+    const situacao = valor("m_situacao", "m_situacao_outro");
+    const inscricao = document.getElementById("m_inscricao").value;
+    const calibre = valor("m_calibre", "m_calibre_outro");
+    const estojo = valor("m_estojo", "m_estojo_outro");
+    const proj = valor("m_proj", "m_proj_outro");
+    const eficaz = valor("m_eficaz", "m_eficaz_outro");
+    const lsmunicao = document.getElementById("lsmunicao").value;
+
+    // PREFIXO DINÂMICO
+    const prefixo = "m" + municaoIndex + "_";
+
+    // SALVAMENTO NO LOCALSTORAGE
+    localStorage.setItem(prefixo + "qtde", qtde);
+    localStorage.setItem(prefixo + "situacao", situacao);
+    localStorage.setItem(prefixo + "inscricao", inscricao);
+    localStorage.setItem(prefixo + "calibre", calibre);
+    localStorage.setItem(prefixo + "estojo", estojo);
+    localStorage.setItem(prefixo + "proj", proj);
+    localStorage.setItem(prefixo + "eficaz", eficaz);
+    localStorage.setItem("lacre_saida_municao", lsmunicao);
+
+    alert("Munição " + municaoIndex + " salva 👊");
+
+    mostrarTela("telaSelecao");
+}
+
+
+/* ================= ADICIONAR MUNIÇÃO ================= */
+
+function adicionarMunicao() {
+
+    // SALVA ANTES DE AVANÇAR
+    salvarMunicaoInterno();
+
+    // CONTROLE DE LIMITE
+    if (municaoIndex === 6) {
+        alert("Total de munições excedidas, preencha quando for fazer o Laudo");
+        return;
+    }
+
+    // AVANÇA ÍNDICE
+    municaoIndex++;
+
+    // ATUALIZA TÍTULO
+    document.getElementById("numMunicao").innerText = municaoIndex;
+
+    // LIMPA CAMPOS
+    limparCamposMunicao();
+
+    controlarCampoTotal();
+    controlarLacreMunicao();
+}
+
+
+/* ================= SALVAR MUNIÇÃO INTERNO ================= */
+
+function salvarMunicaoInterno() {
+
+    const total = document.getElementById("municao_total").value;
+    localStorage.setItem("municao_total", total);
+
+    const qtde = document.getElementById("m_qtde").value;
+    const situacao = valor("m_situacao", "m_situacao_outro");
+    const inscricao = document.getElementById("m_inscricao").value;
+    const calibre = valor("m_calibre", "m_calibre_outro");
+    const estojo = valor("m_estojo", "m_estojo_outro");
+    const proj = valor("m_proj", "m_proj_outro");
+    const eficaz = valor("m_eficaz", "m_eficaz_outro");
+    const lsmunicao = document.getElementById("lsmunicao").value;
+
+    const prefixo = "m" + municaoIndex + "_";
+
+    localStorage.setItem(prefixo + "qtde", qtde);
+    localStorage.setItem(prefixo + "situacao", situacao);
+    localStorage.setItem(prefixo + "inscricao", inscricao);
+    localStorage.setItem(prefixo + "calibre", calibre);
+    localStorage.setItem(prefixo + "estojo", estojo);
+    localStorage.setItem(prefixo + "proj", proj);
+    localStorage.setItem(prefixo + "eficaz", eficaz);
+    localStorage.setItem("lacre_saida_municao", lsmunicao);
+}
+
+
+/* ================= LIMPAR CAMPOS MUNIÇÃO ================= */
+
+function limparCamposMunicao() {
+
+    document.getElementById("m_qtde").value = "";
+
+    document.getElementById("m_situacao").value = "";
+    document.getElementById("m_situacao_outro").value = "";
+    document.getElementById("m_situacao_outro").classList.add("hidden");
+
+    document.getElementById("m_inscricao").value = "";
+
+    document.getElementById("m_calibre").value = "";
+    document.getElementById("m_calibre_outro").value = "";
+    document.getElementById("m_calibre_outro").classList.add("hidden");
+
+    document.getElementById("m_estojo").value = "";
+    document.getElementById("m_estojo_outro").value = "";
+    document.getElementById("m_estojo_outro").classList.add("hidden");
+
+    document.getElementById("m_proj").value = "";
+    document.getElementById("m_proj_outro").value = "";
+    document.getElementById("m_proj_outro").classList.add("hidden");
+
+    document.getElementById("m_eficaz").value = "";
+    document.getElementById("m_eficaz_outro").value = "";
+    document.getElementById("m_eficaz_outro").classList.add("hidden");
+}
+
+/* ================= FINALIZAR ================= */
+
+function flagMunicao() {
+
+    for (let i = 1; i <= 6; i++) {
+        const qtde = localStorage.getItem("m" + i + "_qtde");
+
+        if (qtde && qtde.trim() !== "") {
+            return "SIM";
+        }
+    }
+
+    return "NÃO";
+}
+
+function flagColdre() {
+
+    const campos = [
+        localStorage.getItem("coldre_marca"),
+        localStorage.getItem("coldre_material"),
+        localStorage.getItem("coldre_uso"),
+        localStorage.getItem("coldre_seguranca")
+    ];
+
+    for (let c of campos) {
+        if (c && c.trim() !== "") {
+            return "SIM";
+        }
+    }
+
+    return "NÃO";
+}
+
+function finalizar() {
+
+    const btn = document.getElementById("btnFinalizar");
+
+    btn.disabled = true;
+    btn.innerText = "Enviando...";
+
+    const dados = [
+
+        // ================= PREAMBULO =================
+        localStorage.getItem("timestamp") || "",
+        localStorage.getItem("data") || "",
+        localStorage.getItem("perito") || "",
+        localStorage.getItem("rep") || "",
+        localStorage.getItem("bo") || "",
+        localStorage.getItem("saep") || "",
+        localStorage.getItem("cidade") || "",
+        localStorage.getItem("delegado") || "",
+
+        // ================= ARMA =================
+        localStorage.getItem("arma_disparo") || "",
+        localStorage.getItem("arma_tipo") || "",
+        localStorage.getItem("arma_fabricacao") || "",
+        localStorage.getItem("arma_oxidacao") || "",
+        localStorage.getItem("arma_cabo") || "",
+        localStorage.getItem("arma_marca") || "",
+        
+
+        // ================= FLAGS =================
+        flagMunicao(),
+        localStorage.getItem("municao_total") || "",
+        flagColdre(),
+
+        // ================= ARMA CONT =================
+        localStorage.getItem("arma_modelo") || "",
+        localStorage.getItem("arma_calibre") || "",
+        localStorage.getItem("arma_cano") || "",
+        localStorage.getItem("arma_serie") || "",
+        localStorage.getItem("arma_capacidade") || "",
+        localStorage.getItem("arma_alma") || "",
+        localStorage.getItem("arma_cao") || "",
+        localStorage.getItem("arma_obs") || "",
+        localStorage.getItem("arma_eficacia") || "",
+        localStorage.getItem("arma_recente") || "",
+
+        // ================= MUNIÇÃO =================
+        localStorage.getItem("municao_total") || "",
+
+        // M1
+        localStorage.getItem("m1_qtde") || "",
+        localStorage.getItem("m1_situacao") || "",
+        localStorage.getItem("m1_inscricao") || "",
+        localStorage.getItem("m1_calibre") || "",
+        localStorage.getItem("m1_estojo") || "",
+        localStorage.getItem("m1_proj") || "",
+
+        // M2
+        localStorage.getItem("m2_qtde") || "",
+        localStorage.getItem("m2_situacao") || "",
+        localStorage.getItem("m2_inscricao") || "",
+        localStorage.getItem("m2_calibre") || "",
+        localStorage.getItem("m2_estojo") || "",
+        localStorage.getItem("m2_proj") || "",
+
+        // M3
+        localStorage.getItem("m3_qtde") || "",
+        localStorage.getItem("m3_situacao") || "",
+        localStorage.getItem("m3_inscricao") || "",
+        localStorage.getItem("m3_calibre") || "",
+        localStorage.getItem("m3_estojo") || "",
+        localStorage.getItem("m3_proj") || "",
+
+        // M4 (ordem do Sheets)
+        localStorage.getItem("m4_qtde") || "",
+        localStorage.getItem("m4_inscricao") || "",
+        localStorage.getItem("m4_situacao") || "",
+        localStorage.getItem("m4_calibre") || "",
+        localStorage.getItem("m4_estojo") || "",
+        localStorage.getItem("m4_proj") || "",
+
+        // M5
+        localStorage.getItem("m5_qtde") || "",
+        localStorage.getItem("m5_situacao") || "",
+        localStorage.getItem("m5_inscricao") || "",
+        localStorage.getItem("m5_calibre") || "",
+        localStorage.getItem("m5_estojo") || "",
+        localStorage.getItem("m5_proj") || "",
+
+        // M6
+        localStorage.getItem("m6_qtde") || "",
+        localStorage.getItem("m6_situacao") || "",
+        localStorage.getItem("m6_inscricao") || "",
+        localStorage.getItem("m6_calibre") || "",
+        localStorage.getItem("m6_estojo") || "",
+        localStorage.getItem("m6_proj") || "",
+
+        // ================= COLDRE =================
+        localStorage.getItem("coldre_marca") || "",
+        localStorage.getItem("coldre_material") || "",
+        localStorage.getItem("coldre_uso") || "",
+        localStorage.getItem("coldre_seguranca") || "",
+
+        // ================= SIMULACRO =================
+        localStorage.getItem("simula_material") || "",
+        localStorage.getItem("simula_cor") || "",
+        localStorage.getItem("simula_marca") || "",
+        localStorage.getItem("simula_tipo") || "",
+        localStorage.getItem("simula_modelo") || "",
+        localStorage.getItem("simula_fabricante") || "",
+        localStorage.getItem("simula_numero") || "",
+        localStorage.getItem("simula_calibre") || "",
+        localStorage.getItem("simula_alimentacao") || "",
+        localStorage.getItem("simula_apta") || "",
+        localStorage.getItem("simula_ponta") || "",
+
+        // ================= LACRES =================
+        localStorage.getItem("lacre_saida_arma") || "",
+        localStorage.getItem("lacre_saida_municao") || "",
+        localStorage.getItem("lacre_saida_coldre") || "",
+        localStorage.getItem("lacre_saida_simulacro") || "",
+
+        // ================= EFICÁCIA MUNIÇÕES =================
+        localStorage.getItem("m1_eficaz") || "",
+        localStorage.getItem("m2_eficaz") || "",
+        localStorage.getItem("m3_eficaz") || "",
+        localStorage.getItem("m4_eficaz") || "",
+        localStorage.getItem("m5_eficaz") || "",
+        localStorage.getItem("m6_eficaz") || "",
+
+        // ================= COLUNAS FUTURAS =================
+        "", "", "", "", "", "", "", "", "", "",
+        "", "", "", "", "", "", "", "", "", ""
+    ];
+
+    fetch("https://script.google.com/macros/s/AKfycbwxl0ptLgDosP96nwZfmNuS2JNoaq8UB0VbXqTa4tQkVAEpj_RzV1GqczuvPXd6HAb_/exec", {
+
+    method: "POST",
+
+    body: JSON.stringify(dados)
+
+})
+
+.then(response => response.text())
+
+.then(retorno => {
+
+    btn.disabled = false;
+    btn.innerText = "Finalizar";
+    
+    alert("Dados enviados com sucesso 👊");
+
+    localStorage.clear();
+
+    window.location.href = "index.html";
+
+})
+
+.catch(error => {
+
+    btn.disabled = false;
+    btn.innerText = "Finalizar";
+
+    alert("Erro ao enviar dados");
+
+});
+}
+
+window.onload = function() {
+    mostrarTela("telaPreambulo");
+}
+</script>
+
+</body>
+</html>

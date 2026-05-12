@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Fábrica de Laudos</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0f172a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .frase {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #94a3b8;
+        }
+
+        .frase-perito {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #38bdf8;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .menu button {
+            display: block;
+            width: 200px;
+            margin: 10px auto;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .btn {
+            background-color: #1e293b;
+            color: white;
+        }
+
+        .btn:hover {
+            background-color: #334155;
+        }
+
+        .btn:disabled {
+            background-color: #475569;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Fábrica de Laudos do Brunão</h1>
+
+    <div class="frase" id="frase"></div>
+
+    <select id="perito">
+        <option value="">Selecione o perito</option>
+        <option>Dr. Bruno M. Gonçalves</option>
+        <option>Dra. Cecília Rodrigues Silva</option>
+        <option>Dr. Edgar M. Da Costa</option>
+        <option>Dr. Fabio B. Do Serro</option>
+        <option>Dra. Juliana F. Tonelli</option>
+        <option>Dr. Marco A. Takeu Nishida</option>
+        <option>Dr. Samarone S. Pereira</option>
+        <option>Dr. Thalles Ramos Almeida</option>
+        <option>Dr. Wander Pereira</option>
+    </select>
+
+    <div class="menu">
+        <button class="btn" id="btnDiversos" onclick="irDiversos()" disabled>Diversos</button>
+        <button class="btn" id="btnCortantes" onclick="irCortantes()" disabled>Cortantes</button>
+        <button class="btn" id="btnArmas" onclick="irArmas()" disabled>Armas</button>
+        <button class="btn" id="btnEm breve" onclick="irNovoModulo('Em breve')" disabled>Em breve</button>
+    </div>
+
+    <div class="frase-perito" id="frasePerito"></div>
+
+</div>
+
+<script>
+    const frases = [
+        "Antes do café da manhã não sai laudo ☕",
+        "Hoje promete hein 👀",
+        "Será que o GDL vai te ajudar hoje?",
+        "Hoje é dia hein!",
+        "Até que enfim fazendo jus ao dinheiro do contribuinte...",
+        "Faz valer esse dinheiro que cai na sua conta, Joe!"
+    ];
+
+    document.getElementById("frase").innerText =
+        frases[Math.floor(Math.random() * frases.length)];
+
+    const frasesPeritos = {
+        "Dr. Bruno M. Gonçalves": [
+            "Você é o COMANDO",
+            "Você é o DONO",
+            "Você é ESPECIAL"
+        ],
+        "Dra. Cecília Rodrigues Silva": [
+            "Aqui tem uma turma forte!",
+            "Aqui foi bem formada!",
+            "Aqui não tem preguiça!"
+        ],
+        "Dr. Edgar M. Da Costa": [
+            "Olha quem tá aqui... Já colocou para carregar o BYD?",
+            "Edgar ve... Balança o pi... da GENTE!!!",
+            "A cara do descompromisso"
+        ],
+        "Dr. Fabio B. Do Serro": [
+            "Silvio Santos vem aí!!! La ra La ra La ra!!!",
+            "Opa! Lembra quando a Hebe Carmargo era gata?! Da sua época!",
+            "Caramba?!!! 150 anos de idade e ainda consegue mexer no computador!"
+        ],
+        "Dra. Juliana F. Tonelli": [
+            "Bem vinda Dra. Juliana! Certeza que não é final de semana!",
+            "Vai dar tudo certo Ju!",
+            "Hoje vai ser zerado!"
+        ],
+        "Dr. Marco A. Takeu Nishida": [
+            "E aí Japonês?! fazendo uma pecinha?!",
+            "Takas põe esse povo para trabalhar!",
+            "Certeza que a Renata errou alguma coisa!"
+        ],
+        "Dr. Samarone S. Pereira": [
+            "Tem um V.... olhando para mim!",
+            "Vamos no beach tênis de patineeeetiiii, chupando chicleeeeetiiiii!",
+            "Hum... Sinto cheiro de homem... Esse perfume não combina com você! Tá de BYD?"
+        ],
+        "Dr. Thalles Ramos Almeida": [
+            "Buaaaaaaaaaaaaaaaaa, Buaaaaaaaaaaaa, Buaaaaaaaaa!!!",
+            "Nossa derepente me deu uma preguiça, acho que fui contaminado!",
+            "Há uma nuvem de lágrimas sob os meus olhos!!"
+        ],
+        "Dr. Wander Pereira": [
+            "Domingão né Wandão?! Certeza?!",
+            "E aí?! Mais um feriado?!",
+            "Hoje não vai dar nada! Certeza!"
+        ]
+    };
+
+    const select = document.getElementById("perito");
+    const frasePeritoDiv = document.getElementById("frasePerito");
+
+    function atualizarBotoes() {
+        const perito = select.value;
+
+        document.getElementById("btnDiversos").disabled = !perito;
+        document.getElementById("btnCortantes").disabled = !perito;
+        document.getElementById("btnArmas").disabled = !perito;
+        document.getElementById("btnEm breve").disabled = !perito;
+
+        if (perito && frasesPeritos[perito]) {
+            const lista = frasesPeritos[perito];
+            frasePeritoDiv.innerText =
+                lista[Math.floor(Math.random() * lista.length)];
+        } else {
+            frasePeritoDiv.innerText = "";
+        }
+    }
+
+    select.addEventListener("change", function () {
+        localStorage.setItem("perito", this.value);
+        atualizarBotoes();
+});
+
+    window.onload = atualizarBotoes;
+
+    function irDiversos() {
+        window.open("https://docs.google.com/forms/d/e/1FAIpQLSeYU6XoUkgOobnwhca62O8trawiCXAae8e1Bi3o3GBi7CKtrg/viewform", "_blank");
+    }
+
+    function irCortantes() {
+        window.open("https://docs.google.com/forms/d/e/1FAIpQLSdNK8A1SB4x8NLJ9sofUR029spDuitwx_eJH_E09fyg7KaQiA/viewform", "_blank");
+    }
+
+    function irArmas() {
+        localStorage.setItem("modulo", "armas");
+        window.location.href = "armas.html";
+    }
+
+    function irNovoModulo(nome) {
+        localStorage.setItem("modulo", nome);
+        window.location.href = "armas.html";
+    }
+</script>
+
+</body>
+</html>
